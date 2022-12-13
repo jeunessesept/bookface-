@@ -1,4 +1,4 @@
-import mongoose from "mongoose"
+import dbConnect from "./db/dbConnect.mjs"
 import express from "express"
 import bodyParser from "body-parser"
 import { config } from "dotenv"
@@ -9,11 +9,9 @@ import userLogin from "./src/auth/login.mjs"
 dotenv.config()
 
 const server = express()
+dbConnect()
 
-mongoose.connect(`${process.env.MONGODB_URL}`, {
-    useNewUrlParser: true, 
-    useUnifiedTopology : true,
-})
+
 
 server.set('view engine', 'ejs')
 
@@ -21,12 +19,16 @@ server.use(bodyParser.urlencoded({extended: true}))
 
 server.use(bodyParser.json())
 
-server.get('/', (req, res) => {
-    res.render('index');
-  });
 
+server.get('/register', (req, res) => {
+    res.render('register');
+  });
 server.post('/register', userRegister)
 
+
+server.get('/login', (req, res) => {
+    res.render('login');
+  });
 server.post('/login', userLogin)
 
 server.listen(3000, () => {
