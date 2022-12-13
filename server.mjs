@@ -19,15 +19,18 @@ server.use(bodyParser.urlencoded({extended: true}))
 
 server.use(bodyParser.json())
 
+server.get("/", (req, res) => {
+    res.render('welcome')
+})
 
 server.get('/register', (req, res) => {
-    res.render('register');
+    res.render('auth/register');
   });
 server.post('/register', userRegister)
 
 
 server.get('/login', (req, res) => {
-    res.render('login');
+    res.render('auth/login');
   });
 server.post('/login', userLogin)
 
