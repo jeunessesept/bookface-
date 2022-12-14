@@ -1,4 +1,4 @@
-import User from "../../db/index.mjs";
+import User from "../../models/users.mjs";
 import bcrypt from "bcrypt";
 
 const userRegister = async (req, res) => {
@@ -18,7 +18,8 @@ const userRegister = async (req, res) => {
 
   try {
     await newUser.save();
-    res.send(newUser);
+    // res.send(newUser);
+    res.redirect('/login')
   } catch (error) {
     res.status(500).send(error);
   }
