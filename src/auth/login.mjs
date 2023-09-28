@@ -28,6 +28,7 @@ const userLogin = async (req, res) => {
         algorithm: "HS512",
         expiresIn: "1h",
       });
+      
 
       res.cookie("access_token", token, {
         httpOnly: true,
